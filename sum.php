@@ -39,7 +39,7 @@ function math_calculate($s1, $s2)
         if($plusOne){
             $sum = $sum + 1;
         };
-        if(isset($s1[$i-1]) && $sum >= 10){
+        if(isset($s1[$i-1]) && $sum >= 10 && $i !== 0){
             $sum = $sum - 10;
             $plusOne = true;
         } else {
