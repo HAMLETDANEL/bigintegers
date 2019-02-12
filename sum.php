@@ -4,38 +4,41 @@
 Дано два положительных целых числа в виде строки.
 Числа могут быть очень большими, могут не поместиться в 64 битный integer.
 Использование exec не допускается.
- */
-$int = '121121212128696926492864826';
-$int2 = '9750347509347590347509734970973405974';
+ */ 
 
+$int = '121121212128696926492864826'; //ինիցիալիզացվում է. փոփոխականին վերագրվում է արժեք
+$int2 = '9750347509347590347509734970973405974'; //ինիցիալիզացվում է. փոփոխականին վերագրվում է արժեք
+
+//ֆունկցիան վերադարձնում է գումարը
 function math_sum($int,$int2)
 {
-    $l1 = strlen($int);
-    $l2 = strlen($int2);
+     
+    $l1 = strlen($int); // կատարվում է տիպի փոխարինում
+    $l2 = strlen($int2); // կատարվում է տիպի փոխարինում
 
-    if($l1 === $l2){
-    return math_calculate($int, $int2);
-    } else {
-    if($l1 > $l2 ){
-        return math_calculate($int, str_repeat('0', $l1 - $l2 ).$int2);
-        } else {
+    if($l1 === $l2){ //եթե փոփոխականները իրար հավասար են 
+    return math_calculate($int, $int2); // վերադարձվում է 
+    } else { եթե ոչ
+    if($l1 > $l2 ){ մեծի դեպքում
+        return math_calculate($int, str_repeat('0', $l1 - $l2 ).$int2); // վերադարձվում է եթե տարբերությունը 0 չի 
+        } else { հակառակ դեպքում
 
-        return math_calculate($int2, str_repeat('0', $l2-$l1).$int);
+        return math_calculate($int2, str_repeat('0', $l2-$l1).$int); // վերադարձվում է եթե տարբերությունը 0 չի 
         }
     }
 }
 
-
+// ֆունկցիան կտարում է թվերի թվանշանների թվանշանները 
 function math_calculate($s1, $s2)
 {
 
     // like in mathematics;
-    $l = strlen($s1);
-    $result = [];
+    $l = strlen($s1); //չեմ հասկանում ինչում է հայտարարվում ?: ֆունկցիան արդեն ստանում է փոփոխված տիպի փոփոխական 
+    $result = []; //ինիցիալիզացվում է զանգվածը
 
     $plusOne = false;
-    for($i = strlen($s1)-1; $i >= 0 ; $i--){
-        $sum = (int) $s1[$i] + (int) $s2[$i];
+    for($i = strlen($s1)-1; $i >= 0 ; $i--){ // կարդում է տողը վերջից ու կատարվում է հետ հաշվարկ, քանի դեռ $i >= 0
+        $sum = (int) $s1[$i] + (int) $s2[$i]; // գումարվում են թվի թվանշանները 
         if($plusOne){
             $sum = $sum + 1;
         };
@@ -54,12 +57,12 @@ function math_calculate($s1, $s2)
     return $result;
 };
 
-
+// ֆունկցիան ստուգում է արդյոք math_sum ֆունկցիան ճիշտ է աշխատում   
 function test($int, $int2){
-    var_dump($int+$int2);
-    var_dump(math_sum($int, $int2));
-    return $int+$int2 == math_sum($int, $int2);
+    var_dump($int+$int2); // 1- ին դեպքում տպվում է փոփոխականների գումարը
+    var_dump(math_sum($int, $int2)); // 2- րդ դեպքում է փոփոխականների գումարը, բայց այս դեպքում math_sum ֆունկցիայի միջոցով
+    return $int+$int2 == math_sum($int, $int2); // ստուգվում է 1-ին և 2-րդ հավասարությունը
 };
 
-var_dump(test($int, $int2));
+var_dump(test($int, $int2)); // կանչվում է test ֆունկցիան
 
